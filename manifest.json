@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Spotify Extension",
+  "version": "1.0",
+  "description": "A Spotify Chrome Extension",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwYUWnEWTmamJ3byZRKyyltpwNZfrkToWosNKYW4FLWQ0zY1epxLHka0HPEzoOAGkb0ZrMDfClEns67dDKfT5glRWRS5S3tzuC8vbpeRgoiLdpADwlNp+CBeY2mgyAdcCzgk4S6ooWwi4BSohvofgXhfB3d+jTDdOh968o2JdXEiEZZnJdb7owTw/G4I6xw5fmSkzNBuSYYf/4wen4pNRWPVQxJGO3ZMR0b5N9zFjSDYlEtXVXEW42GRHlpBr0dbj6lsf09ujoNYaifH3//wUM0Y4QwNZjfQwPabr23683q+BpBOubgp+s6saX5wMNZowhncBQECinSyDnSIr4P/87wIDAQAB",
+
+  "chrome_url_overrides": {
+    "newtab": "dist/newtab.html"  
+  },
+
+  "background": {
+    "service_worker": "dist/index.js"  
+  },
+
+  "permissions": [
+    "storage", 
+    "identity",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "https://api.spotify.com/*",
+    "https://accounts.spotify.com/*",
+    "http://localhost:3000/*"
+  ],
+
+  "action": {
+    "icons": {
+    "16": "assets/icons/productify-logo-16.png",
+    "48": "assets/icons/productify-logo-48.png",
+    "128": "assets/icons/productify-logo-128.png"
+  }
+  }
+}
+
