@@ -1,6 +1,5 @@
 
 // Tries pulling access token from chrome storage; will indicate logged in and return user profile if token exists, else will indicate logged out
-
 // Function to get the access token from Chrome storage
 export const getAccessToken = (): Promise<string | null> => {
     return new Promise((resolve) => {
@@ -40,3 +39,4 @@ export const fetchUserProfile = async (): Promise<{ loggedIn: boolean; userProfi
         return { loggedIn: false, userProfile: null };
     }
 };
+

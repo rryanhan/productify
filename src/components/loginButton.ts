@@ -10,8 +10,8 @@ export const updateUserProfile = async () => {
     
     if (cachedProfile.userProfile) {
         // If user is logged in, set profile picture and username to spotify information
-        profilePic.src = cachedProfile.userProfile.images[0]?.url || 'assets/icons/default-pfp.jpeg';
-        username.textContent = cachedProfile.userProfile.display_name || '';
+        profilePic.src = cachedProfile.userProfile.images[0]?.url;
+        username.textContent = cachedProfile.userProfile.display_name;
         
         // Remove click event listener if user is logged in
         profilePic.removeEventListener('click', handleLoginClick);
