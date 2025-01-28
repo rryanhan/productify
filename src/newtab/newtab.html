@@ -12,18 +12,22 @@
     <title>Productify</title>
   </head>
   <body>
-    <div class="flex justify-between items-start p-5">
-        <img id="productify-logo" class="w-56" src="assets/icons/Productify.png" alt="Productify Logo" />
-        
-        <div class="flex items-center space-x-2"> <!-- Added space-x-2 for spacing -->
-            <img id="profilePic" class="w-12 h-12 overflow-hidden object-cover rounded-full border-3 border-customWhite" alt="Profile Picture" /> <!-- Added border -->
-            <div id="username" class="text-2xl font-light text-customWhite opacity-75 "> <!-- Added font-semibold for emphasis -->
-                Username
+    <div id="container" class="relative overflow-hidden">
+        <div id="currentView" class="flex justify-between items-start p-5">
+            <img id="productify-logo" class="w-56" src="assets/icons/Productify.png" alt="Productify Logo" />
+            <div class="flex items-center space-x-2">
+                <img id="profilePic" class="w-12 h-12 overflow-hidden object-cover rounded-full border-3 border-customWhite" alt="Profile Picture" />
+                <div id="username" class="text-2xl font-light text-customWhite opacity-75">Username</div>
             </div>
         </div>
-    
+        <div id="clock" class="text-center text-customGreen opacity-75 text-11xl -mt-10"></div>
+        <div id="greeting" class="text-center font-light text-customWhite opacity-75 text-3xl -mt-10"></div>
+
+        <!-- New sliding content -->
+        <div id="newView" class="absolute inset-0 transform translate-x-full transition-transform duration-300">
+            <h1 class="text-4xl">New Content Here</h1>
+            <!-- Add more content as needed -->
+        </div>
     </div>
-    <div id="clock" class = "text-center text-customGreen opacity-75 text-11xl -mt-10"></div>
-    <div id="greeting" class = "text-center font-light text-customWhite opacity-75 text-3xl -mt-10"></div>
-  </body>
+</body>
 </html>

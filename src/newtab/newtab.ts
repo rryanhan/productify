@@ -12,7 +12,9 @@ setBackgroundImage();
 setInterval(updateClock, 1000);
 updateClock();
 
-
+// LOGIN BUTTON FUNCTIONALITY
 updateUserProfile();
 
+// GREETING FUNCTIONALITY
 callGreeting();
+
