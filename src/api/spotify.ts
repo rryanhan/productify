@@ -1,4 +1,3 @@
-
 // Login function - returns loggedIn status and user profile
 export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }> => {
     try {
@@ -62,7 +61,8 @@ export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }>
         await new Promise<void>((resolve) => {
             chrome.storage.local.set({
                 access_token: tokens.access_token,
-                refresh_token: tokens.refresh_token
+                refresh_token: tokens.refresh_token,
+                token_expiry: tokens.expires_in * 1000 + Date.now()
             }, resolve);
         });
 
@@ -93,14 +93,59 @@ const fetchUserProfile = async (accessToken: string) => {
     return await response.json(); // Return the user profile data
 };
 
-// Tries pulling access token from chrome storage; will indicate logged in and return user profile if token exists, else will indicate logged out
-// Function to get the access token from Chrome storage
+// Function to get the access token from Chrome local storage
 export const getAccessToken = (): Promise<string | null> => {
     return new Promise((resolve) => {
-        chrome.storage.local.get(['access_token'], (result) => {
+        chrome.storage.local.get(['access_token', 'token_expiry', 'refresh_token'], async (result) => {
             const accessToken = result.access_token || null;
-            resolve(accessToken);
+            const tokenExpiry = result.token_expiry || 0;
+            const refreshToken = result.refresh_token || null;
+            const now = Date.now();
+
+            // Check if the access token is expired
+            if (accessToken && now < tokenExpiry) {
+                resolve(accessToken);
+            } else if (refreshToken) {
+                // Refresh the access token if it is expired
+                try {
+                    const newAccessToken = await refreshAccessToken(refreshToken);
+                    resolve(newAccessToken);
+                } catch (error) {
+                    console.error("Failed to refresh access token:", error);
+                    resolve(null);
+                }
+            } else {
+                resolve(null);
+            }
         });
     });
+};
+
+// Function to refresh the access token using the refresh token - calls /refresh endpoint
+const refreshAccessToken = async (refreshToken: string): Promise<string> => {
+    console.log('Attempting to refresh access token with refresh token:', refreshToken);
+
+    const response = await fetch('http://localhost:3000/refresh', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refresh_token: refreshToken })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to refresh access token: ${response.status}`);
+    }
+
+    const tokens = await response.json();
+    console.log('Refreshed tokens:', tokens);
+
+    // Store the new access token and update the expiration time into chrome local storage
+    await new Promise<void>((resolve) => {
+        chrome.storage.local.set({
+            access_token: tokens.access_token,
+            token_expiry: tokens.expires_in * 1000 + Date.now()
+        }, resolve);
+    });
+
+    return tokens.access_token;
 };
 
