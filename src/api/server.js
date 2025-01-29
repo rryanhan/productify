@@ -11,7 +11,6 @@ const PORT = 3000;
 const client_id = 'e3f6705da6a7449c819fcfadd059a6d8';
 const client_secret = '7eb256c0a33841aaac297416ce64d47c';
 
-// Enable CORS for all routes
 app.use(cors());
 
 // Create rate limiter
@@ -20,10 +19,9 @@ const limiter = rateLimit({
   max: 100                    // 100 requests per IP
 });
 
-// Apply to all routes
 app.use(limiter);
 
-// Add the exchange endpoint
+// Token xchange endpoint - exchanges auth code for refresh and access tokens
 app.post('/exchange', async (req, res) => {
     // Extract auth code and redirect_uri from request body
   const { code, redirect_uri } = req.body;
@@ -56,7 +54,7 @@ app.post('/exchange', async (req, res) => {
   }
 });
 
-// Add the refresh endpoint
+// Token refresh endpoint
 app.post('/refresh', async (req, res) => {
   // Extract refresh token from request body
   const { refresh_token } = req.body;

@@ -1,10 +1,11 @@
 import './styles/tailwind.css';
 import { getAccessToken } from './api/spotify';
+import { getTopTracks, getTopArtists } from './api/spotify';
 
 // Background processes, state management, etc.
 console.log("Background service worker started");
 
-chrome.alarms.create("refreshSpotifyData", { periodInMinutes: 0.3 });
+chrome.alarms.create("refreshSpotifyData", { periodInMinutes: 30 });
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === "refreshSpotifyData") {
@@ -13,22 +14,29 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             const accessToken = await getAccessToken();
             console.log("Access token after refresh:", accessToken);
 
-            // You can add more logic here to use the access token
+            await getTopTracks("short_term");
+            console.log("Fetched short term tracks");
+
+            await getTopTracks("medium_term");
+            console.log("Fetched medium term tracks");
+
+            await getTopTracks("long_term");
+            console.log("Fetched long term tracks");
+
+            await getTopArtists("short_term");
+            console.log("Fetched short term artists");
+
+            await getTopArtists("medium_term");
+            console.log("Fetched medium term artists");
+
+            await getTopArtists("long_term");
+            console.log("Fetched long term artists");
+
+
         } catch (error) {
             console.error("Error fetching Spotify data:", error);
         }
     }
 });
 
-// Keep the service worker active for testing
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message === "keepAlive") {
-        console.log("Service worker is kept alive");
-        sendResponse("Service worker is alive");
-    }
-});
 
-// Log the contents of Chrome's local storage
-chrome.storage.local.get(null, (items) => {
-    console.log("Chrome local storage contents:", items);
-});

@@ -10,7 +10,7 @@ export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }>
             new URLSearchParams({
                 response_type: 'code',
                 client_id: 'e3f6705da6a7449c819fcfadd059a6d8',
-                scope: 'user-read-private user-read-email',
+                scope: 'user-read-private user-read-email user-top-read',
                 redirect_uri: redirectUrl
             }).toString();
 
@@ -149,3 +149,60 @@ const refreshAccessToken = async (refreshToken: string): Promise<string> => {
     return tokens.access_token;
 };
 
+const CACHE_EXPIRATION_TIME = 1000 * 60 * 60 * 24; // Cache data every 24 hours
+// Function to get cached data or fetch new data if expired
+
+// ** KEY IS A DYNAMIC STRING THAT STORES/RETRIEVES DATA FROM CHROME LOCAL STORAGE DEPENDING ON KEY VALUE 
+// - either short_term, medium_term, or long_term **
+const getCachedData = async (key: string, fetchFunction: () => Promise<any>): Promise<any> => { // Promise<any> is the return type
+    return new Promise((resolve) => {
+        // Get data and timestamp stored from chrome local storage
+        chrome.storage.local.get([key, `${key}_timestamp`], async (result) => {
+            const lastUpdated = result[`${key}_timestamp`] || 0;
+            const now = Date.now();
+
+            // If cache exists and is valid, return it
+            if (result[key] && now - lastUpdated < CACHE_EXPIRATION_TIME) {
+                console.log(`Returning cached data for ${key}`);
+                resolve(result[key]);
+                return;
+            }
+
+            // Otherwise, fetch new data and update cache
+            console.log(`Fetching new data for ${key}`);
+            try {
+                const newData = await fetchFunction(); // Calls the anonymous function, which calls fetchTopItems with 2 arguments
+                
+                // Sets result of fetchTopItems as [key] and [`${key}_timestamp`] as the timestamp in chrome local storage
+                chrome.storage.local.set({ 
+                    [key]: newData, // 
+                    [`${key}_timestamp`]: now 
+                });
+                resolve(newData);
+            } catch (error) {
+                console.error(`Error fetching ${key}:`, error);
+                resolve(null);
+            }
+        });
+    });
+};
+
+// Fetch top tracks and artists
+const fetchTopItems = async (type: "tracks" | "artists", timeRange: "short_term" | "medium_term" | "long_term") => {
+    const accessToken = await getAccessToken();
+    if (!accessToken) throw new Error("No access token found");
+
+    const response = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=50`, {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+    });
+
+    if (!response.ok) throw new Error(`Failed to fetch top ${type}: ${response.status}`);
+    return await response.json();
+};
+
+// Public functions to get cached or fresh data
+export const getTopTracks = (timeRange: "short_term" | "medium_term" | "long_term") => 
+    getCachedData(`top_tracks_${timeRange}`, () => fetchTopItems("tracks", timeRange)); // getCachedData calls an anonymous function that calls fetchTopItems with 2 arguments
+
+export const getTopArtists = (timeRange: "short_term" | "medium_term" | "long_term") => 
+    getCachedData(`top_artists_${timeRange}`, () => fetchTopItems("artists", timeRange));
