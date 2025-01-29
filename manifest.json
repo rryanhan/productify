@@ -31,6 +31,11 @@
     "48": "assets/icons/productify-logo-48.png",
     "128": "assets/icons/productify-logo-128.png"
   }
+  },
+  "content_security_policy": {
+    "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
+  }               
 }
 

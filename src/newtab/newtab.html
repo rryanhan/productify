@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../src/styles/tailwind.css" rel="stylesheet">
@@ -8,22 +8,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="assets/lib/swiper-bundle.min.css" />
     <title>Productify</title>
-  </head>
-  <body>
-    <div id="container" class="relative overflow-hidden">
-        <div id="currentView" class="flex justify-between items-start p-5">
+    <script src="assets/lib/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div id="container" class="relative overflow-hidden h-screen w-screen">
+        <div id="currentView" class="flex justify-between items-start p-5 w-full">
             <img id="productify-logo" class="w-56" src="assets/icons/Productify.png" alt="Productify Logo" />
             <div class="flex items-center space-x-2">
                 <img id="profilePic" class="w-12 h-12 overflow-hidden object-cover rounded-full border-3 border-customWhite" alt="Profile Picture" />
                 <div id="username" class="text-2xl font-light text-customWhite opacity-75">Username</div>
             </div>
         </div>
-        <div id="clock" class="text-center text-customGreen opacity-75 text-11xl -mt-10"></div>
-        <div id="greeting" class="text-center font-light text-customWhite opacity-75 text-3xl -mt-10"></div>
-
-
+        <div class="swiper h-full w-full">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide flex flex-col justify-center items-center">
+                    <div id="clock" class="text-center text-customGreen opacity-75 text-11xl -mt-10"></div>
+                    <div id="greeting" class="text-center font-light text-customWhite opacity-75 text-3xl -mt-10"></div>
+                </div>
+                <div class="swiper-slide flex justify-center items-center">
+                    <div id="newView" class="">
+                        <h1 class="text-4xl">New Content Here</h1>
+                        <!-- Add more content as needed -->
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+        </div>
     </div>
 </body>
 </html>

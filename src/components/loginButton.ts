@@ -1,5 +1,5 @@
 // src/components/loginButton.ts
-import { login } from '../newtab/auth';
+import { login } from '../api/spotify';
 
 const profilePic = document.getElementById('profilePic') as HTMLImageElement;
 const username = document.getElementById('username') as HTMLElement;
