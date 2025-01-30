@@ -1,6 +1,42 @@
 import Swiper from 'swiper';
 import '../assets/lib/swiper-bundle.min.css';
 
+export function initArtistsSwiper(): Swiper {
+    const swiper = new Swiper('.swiper-container-artists', {
+        slidesPerView: 10,
+        spaceBetween: 0,
+        direction: 'horizontal',
+        loop: false,
+    
+        cssMode: true,
+    
+        mousewheel: {
+          forceToAxis: true,
+        },
+        
+    });
+
+    return swiper
+}
+export function initTracksSwiper(): Swiper {
+    const swiper = new Swiper('.swiper-container-tracks', {
+        slidesPerView: 10,
+        spaceBetween: 0,
+        direction: 'horizontal',
+        loop: false,
+    
+        cssMode: true,
+    
+        mousewheel: {
+          forceToAxis: true,
+        },
+    
+    });
+
+    return swiper
+}
+
+
 export function initSwiper(): Swiper {
     const swiper = new Swiper('.swiper', {
         direction: 'horizontal',
@@ -30,3 +66,4 @@ export function initSwiper(): Swiper {
 
     return swiper;
 }
+
