@@ -11,8 +11,13 @@ app.use(express.json());
 const PORT = process.env.PORT;
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
+const VERCEL_SERVER_URL = process.env.VERCEL_SERVER_URL;
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow requests from your Chrome extension
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Create rate limiter
 const limiter = rateLimit({
@@ -22,9 +27,9 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-// Token xchange endpoint - exchanges auth code for refresh and access tokens
+// Token exchange endpoint - exchanges auth code for refresh and access tokens
 app.post('/exchange', async (req, res) => {
-    // Extract auth code and redirect_uri from request body
+  // Extract auth code and redirect_uri from request body
   const { code, redirect_uri } = req.body;
   console.log('Received exchange request:', { code, redirect_uri });
   

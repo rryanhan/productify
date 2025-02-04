@@ -1,3 +1,5 @@
+const VERCEL_SERVER_URL = 'https://productify-4h894sqct-ryans-projects-18a4c809.vercel.app';
+
 // Login function - returns loggedIn status and user profile
 export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }> => {
     try {
@@ -39,7 +41,7 @@ export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }>
         console.log('Got auth code:', code);
 
         // Call server at exchange endpoint to exchange auth code for tokens
-        const response = await fetch('http://localhost:3000/exchange', {
+        const response = await fetch(`${VERCEL_SERVER_URL}/exchange`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -146,7 +148,7 @@ export const getAccessToken = (): Promise<string | null> => {
 const refreshAccessToken = async (refreshToken: string): Promise<string> => {
     console.log('Attempting to refresh access token with refresh token:', refreshToken);
 
-    const response = await fetch('http://localhost:3000/refresh', {
+    const response = await fetch(`${VERCEL_SERVER_URL}/refresh`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refresh_token: refreshToken })
