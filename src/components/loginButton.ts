@@ -21,10 +21,11 @@ export const updateUserProfile = async () => {
         profilePic.src = 'assets/icons/default-pfp.jpeg';
         username.textContent = '';
 
+        // Remove any existing event listener to avoid duplicates
+        profilePic.removeEventListener('click', handleLoginClick);
+
         // Add click event listener to initiate login
         profilePic.addEventListener('click', handleLoginClick);
-        
-       
     }
 };
 
