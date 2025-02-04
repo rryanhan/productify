@@ -19,11 +19,14 @@
             <div class="relative">
                 <div id="profileContainer" class="flex items-center space-x-2 cursor-pointer">
                     <img id="profilePic" class="w-12 h-12 overflow-hidden object-cover rounded-full border-3 border-customWhite" alt="Profile Picture" />
-                    <div id="username" class="text-2xl font-light text-customWhite opacity-75">Username</div>
+                    <div id="username" class="text-2xl font-light text-customWhite opacity-100"></div>
                 </div>
                 <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-black rounded-md shadow-lg z-50">
                     <a href="#" id="viewProfile" class="block px-4 py-2 text-customWhite text-opacity-75 hover:bg-customGreen hover:bg-opacity-75 hover:rounded-md">Profile</a>
                     <a href="#" id="setBackgroundImage" class="block px-4 py-2 text-customWhite text-opacity-75 hover:bg-customGreen hover:bg-opacity-75 hover:rounded-md">Set Background Image</a>
+                        <div class="hidden">
+                            <input type="file" id="backgroundImageInput" accept="image/*">
+                        </div>
                     <a href="#" id="signOut" class="block px-4 py-2 text-customWhite text-opacity-75 hover:bg-customGreen hover:bg-opacity-75 hover:rounded-md">Sign Out</a>
                 </div>
             </div>
@@ -31,12 +34,12 @@
         <div class="swiper h-full w-full">
             <div class="swiper-wrapper">
                 <div class="swiper-slide flex flex-col justify-center items-center">
-                    <div id="clock" class="text-center text-customGreen opacity-75 text-11xl -mt-10"></div>
-                    <div id="greeting" class="text-center font-light text-customWhite opacity-75 text-3xl -mt-10"></div>
+                    <div id="clock" class="text-center text-customGreen opacity-100 text-11xl -mt-10"></div>
+                    <div id="greeting" class="text-center font-light text-customWhite opacity-100 text-3xl -mt-10"></div>
                 </div>
                 <div class="swiper-slide flex justify-center items-center">
                     <div id="newView" class="mx-20">
-                        <div class="text-7xl text-customGreen opacity-75 text-center font-light"> Your Stats</div>
+                        <div class="text-7xl text-customGreen opacity-100 text-center font-light"> Your Stats</div>
                         <div id="artistsButtonGroup" class="flex items-end justify-center space-x-4 mb-2 mt-6">
                             <div class="flex flex-col justify-center">
                                 <h1 class="text-5xl text-customWhite opacity-75 text-center font-light">Artists</h1>

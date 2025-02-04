@@ -46,11 +46,11 @@ export const updateButton = (selectedButtonId: string, buttonGroup: string) => {
     const buttons = document.querySelectorAll(`#${buttonGroup} button`);
     buttons.forEach(button => {
         if (button.id === selectedButtonId) {
-            button.classList.add('bg-customGreen', 'text-customWhite', 'bg-opacity-75', 'text-opacity-75', 'transition-colors', 'duration-500', 'ease-in-out');
-            button.classList.remove('bg-customGrey', 'text-customWhite', 'bg-opacity-40', 'text-opacity-75');
+            button.classList.add('bg-customGreen', 'text-customWhite', 'bg-opacity-100', 'text-opacity-100', 'transition-colors', 'duration-500', 'ease-in-out');
+            button.classList.remove('bg-customGrey', 'text-customWhite', 'bg-opacity-75', 'text-opacity-100');
         } else {
-            button.classList.remove('bg-customGreen', 'text-customWhite', 'bg-opacity-75', 'text-opacity-75', 'transition-colors', 'duration-500', 'ease-in-out');
-            button.classList.add('bg-customGrey', 'text-customWhite', 'bg-opacity-40', 'text-opacity-75');
+            button.classList.remove('bg-customGreen', 'text-customWhite', 'bg-opacity-100', 'text-opacity-100', 'transition-colors', 'duration-500', 'ease-in-out');
+            button.classList.add('bg-customGrey', 'text-customWhite', 'bg-opacity-75', 'text-opacity-100');
         }
     });
 };

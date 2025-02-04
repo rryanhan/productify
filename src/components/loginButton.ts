@@ -1,6 +1,5 @@
 // src/components/loginButton.ts
-import { login } from '../api/spotify';
-import { logout } from '../api/spotify';
+import { login, logout } from '../api/spotify';
 
 const profilePic = document.getElementById('profilePic') as HTMLImageElement;
 const username = document.getElementById('username') as HTMLElement;
@@ -30,7 +29,7 @@ export const updateUserProfile = async () => {
 };
 
 // Function to handle login click
-const handleLoginClick = async () => {
+export const handleLoginClick = async () => {
     // profilePic.src = 'assets/icons/loading-spinner.gif'; ADD THIS IN LATER
 
     const { loggedIn, userProfile } = await login(); // Recieve login status and user profile
