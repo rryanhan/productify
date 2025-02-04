@@ -1,5 +1,6 @@
 // src/components/loginButton.ts
 import { login } from '../api/spotify';
+import { logout } from '../api/spotify';
 
 const profilePic = document.getElementById('profilePic') as HTMLImageElement;
 const username = document.getElementById('username') as HTMLElement;
@@ -15,6 +16,7 @@ export const updateUserProfile = async () => {
         
         // Remove click event listener if user is logged in
         profilePic.removeEventListener('click', handleLoginClick);
+        
     } else {
         // User is not logged in
         profilePic.src = 'assets/icons/default-pfp.jpeg';
@@ -22,6 +24,8 @@ export const updateUserProfile = async () => {
 
         // Add click event listener to initiate login
         profilePic.addEventListener('click', handleLoginClick);
+        
+       
     }
 };
 
@@ -35,9 +39,19 @@ const handleLoginClick = async () => {
         await chrome.storage.local.set({ userProfile });
         
         // Update the user profile display
-        updateUserProfile(); 
+        updateUserProfile();
+        window.location.reload(); 
     } else {
         console.error('Login failed'); 
         profilePic.src = 'assets/icons/default-pfp.jpeg'; // Reset to default profile picture
     }
 };
+
+export const signoutButton = async() => {
+    const logoutButton = document.getElementById('signOut')
+    logoutButton?.addEventListener('click', async () => {
+        await logout();
+        updateUserProfile();
+        window.location.reload();
+    });
+}

@@ -78,6 +78,27 @@ export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }>
     }
 };
 
+// Function to log out the user
+export const logout = async () => {
+    try {
+        // Clear tokens from chrome local storage
+        await new Promise<void>((resolve) => {
+            chrome.storage.local.remove(['access_token', 'refresh_token', 'token_expiry', 'userProfile'], resolve);
+        });
+
+        console.log('Tokens cleared successfully');
+
+        // Optionally, perform additional cleanup actions here
+        // For example, redirect to the login page or update the UI
+        // window.location.href = '/login'; // Redirect to login page
+
+        return { loggedOut: true }; // Return loggedOut status as true
+    } catch (error) {
+        console.error('Logout failed:', error);
+        return { loggedOut: false }; // Return loggedOut status as false on error
+    }
+};
+
 // Function to fetch user profile using access token
 const fetchUserProfile = async (accessToken: string) => {
     const response = await fetch('https://api.spotify.com/v1/me', {
@@ -206,15 +227,6 @@ export const getTopTracks = (timeRange: "short_term" | "medium_term" | "long_ter
 
 export const getTopArtists = (timeRange: "short_term" | "medium_term" | "long_term") => 
     getCachedData(`top_artists_${timeRange}`, () => fetchTopItems("artists", timeRange));
-
-interface RecommendationsConfig {
-    allTimeArtistIDs: string[];
-    allTimeTrackIDs: string[];
-    currentArtistIDs: string[];
-    currentTrackIDs: string[];
-    country: string;
-}
-
 
 export const createPlaylist = async (trackUris: string[]) => {
     try {

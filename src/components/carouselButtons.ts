@@ -1,4 +1,6 @@
 import { createPlaylist } from '../api/spotify';
+import { artistsCarousel } from './artistsCarousel';
+import { tracksCarousel } from './tracksCarousel';
 
 // Function to create a playlist from the populated tracks
 export const createPlaylistButton = async () => {
@@ -50,5 +52,51 @@ export const updateButton = (selectedButtonId: string, buttonGroup: string) => {
             button.classList.remove('bg-customGreen', 'text-customWhite', 'bg-opacity-75', 'text-opacity-75', 'transition-colors', 'duration-500', 'ease-in-out');
             button.classList.add('bg-customGrey', 'text-customWhite', 'bg-opacity-40', 'text-opacity-75');
         }
+    });
+};
+
+// Function to initialize carousels and add event listeners
+export const initializeCarouselsAndListeners = () => {
+    // Initialize the carousels with the default time range - short_term
+    artistsCarousel("short_term");
+    updateButton("shortTermArtistsBtn", "artistsButtonGroup");
+
+    tracksCarousel("short_term");
+    updateButton("shortTermTracksBtn", "tracksButtonGroup");
+
+    let selectedTimeRange: "short_term" | "medium_term" | "long_term" = "short_term";
+
+    // Add event listener to the create playlist button
+    document.getElementById("createPlaylistBtn")?.addEventListener("click", createPlaylistButton);
+
+    // Add event listeners to the artist buttons
+    document.getElementById("shortTermArtistsBtn")?.addEventListener("click", () => {
+        artistsCarousel("short_term");
+        updateButton("shortTermArtistsBtn", "artistsButtonGroup");
+    });
+    document.getElementById("mediumTermArtistsBtn")?.addEventListener("click", () => {
+        artistsCarousel("medium_term");
+        updateButton("mediumTermArtistsBtn", "artistsButtonGroup");
+    });
+    document.getElementById("longTermArtistsBtn")?.addEventListener("click", () => {
+        artistsCarousel("long_term");
+        updateButton("longTermArtistsBtn", "artistsButtonGroup");
+    });
+
+    // Add event listeners to the track buttons
+    document.getElementById("shortTermTracksBtn")?.addEventListener("click", () => {
+        selectedTimeRange = "short_term";
+        tracksCarousel(selectedTimeRange);
+        updateButton("shortTermTracksBtn", "tracksButtonGroup");
+    });
+    document.getElementById("mediumTermTracksBtn")?.addEventListener("click", () => {
+        selectedTimeRange = "medium_term";
+        tracksCarousel(selectedTimeRange);
+        updateButton("mediumTermTracksBtn", "tracksButtonGroup");
+    });
+    document.getElementById("longTermTracksBtn")?.addEventListener("click", () => {
+        selectedTimeRange = "long_term";
+        tracksCarousel(selectedTimeRange);
+        updateButton("longTermTracksBtn", "tracksButtonGroup");
     });
 };
