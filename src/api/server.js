@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());  
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 
