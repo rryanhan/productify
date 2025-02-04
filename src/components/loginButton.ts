@@ -1,8 +1,16 @@
 // src/components/loginButton.ts
 import { login, logout } from '../spotify';
 
-const profilePic = document.getElementById('profilePic') as HTMLImageElement;
-const username = document.getElementById('username') as HTMLElement;
+let profilePic: HTMLImageElement;
+let username: HTMLElement;
+
+document.addEventListener('DOMContentLoaded', () => {
+    profilePic = document.getElementById('profilePic') as HTMLImageElement;
+    username = document.getElementById('username') as HTMLElement;
+
+    // Initialize user profile
+    updateUserProfile();
+});
 
 // Function to update user profile button based on chrome local storage
 export const updateUserProfile = async () => {
