@@ -11,10 +11,9 @@ app.use(express.json());
 const PORT = process.env.PORT;
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const VERCEL_SERVER_URL = process.env.VERCEL_SERVER_URL;
 
 app.use(cors({
-  origin: '*', // Allow requests from your Chrome extension
+  origin: 'chrome-extension://mclmkimbojpfimecdcokjfogeeafpnnj', // Allow requests from your Chrome extension
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

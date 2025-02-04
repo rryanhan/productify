@@ -24,7 +24,7 @@
     "https://api.spotify.com/*",
     "https://accounts.spotify.com/*",
     "http://localhost:3000/*",
-    "https://productify-4h894sqct-ryans-projects-18a4c809.vercel.app/*"
+    "https://productify-alpha.vercel.app/*"
   ],
 
   "action": {

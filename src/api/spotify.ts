@@ -1,4 +1,4 @@
-const VERCEL_SERVER_URL = 'https://productify-4h894sqct-ryans-projects-18a4c809.vercel.app';
+const VERCEL_SERVER_URL = 'https://productify-alpha.vercel.app';
 
 // Login function - returns loggedIn status and user profile
 export const login = async (): Promise<{ loggedIn: boolean; userProfile?: any }> => {
