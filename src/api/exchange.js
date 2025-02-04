@@ -31,7 +31,12 @@ module.exports = async (req, res) => {
     console.log('Token exchange successful');
     res.json(response.data);
   } catch (error) {
-    console.error('Token exchange failed:', error);
-    res.status(500).json({ error: 'Token exchange failed' });
+    if (error.response) {
+      console.error('Token exchange failed:', error.response.data);
+      res.status(500).json({ error: error.response.data });
+    } else {
+      console.error('Token exchange failed:', error.message);
+      res.status(500).json({ error: 'Token exchange failed' });
+    }
   }
 };
