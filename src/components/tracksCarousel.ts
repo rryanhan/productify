@@ -1,4 +1,4 @@
-import { getTopTracks } from '../api/spotify';
+import { getTopTracks } from '../spotify';
 import { initTracksSwiper } from '../swiper/swiper-init';
 
 // Define types for the data returned by the Spotify API

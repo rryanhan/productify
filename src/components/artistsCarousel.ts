@@ -1,4 +1,4 @@
-import { getTopArtists } from '../api/spotify';
+import { getTopArtists } from '../spotify';
 import { initArtistsSwiper } from '../swiper/swiper-init';
 
 // Define types for the data returned by the Spotify API

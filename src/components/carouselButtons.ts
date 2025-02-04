@@ -1,4 +1,4 @@
-import { createPlaylist } from '../api/spotify';
+import { createPlaylist } from '../spotify';
 import { artistsCarousel } from './artistsCarousel';
 import { tracksCarousel } from './tracksCarousel';
 

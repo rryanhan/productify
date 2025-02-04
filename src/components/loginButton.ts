@@ -1,5 +1,5 @@
 // src/components/loginButton.ts
-import { login, logout } from '../api/spotify';
+import { login, logout } from '../spotify';
 
 const profilePic = document.getElementById('profilePic') as HTMLImageElement;
 const username = document.getElementById('username') as HTMLElement;

@@ -10,17 +10,16 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { code, redirect_uri } = req.body;
-  console.log('Received exchange request:', { code, redirect_uri });
+  const { refresh_token } = req.body;
+  console.log('Received refresh request:', { refresh_token });
 
   try {
     const response = await axios({
       method: 'post',
       url: 'https://accounts.spotify.com/api/token',
       params: {
-        code: code,
-        redirect_uri: redirect_uri,
-        grant_type: 'authorization_code'
+        refresh_token: refresh_token,
+        grant_type: 'refresh_token'
       },
       headers: {
         'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
@@ -28,10 +27,9 @@ module.exports = async (req, res) => {
       }
     });
 
-    console.log('Token exchange successful');
     res.json(response.data);
   } catch (error) {
-    console.error('Token exchange failed:', error);
-    res.status(500).json({ error: 'Token exchange failed' });
+    console.error('Error refreshing token:', error);
+    res.status(500).json({ error: 'Failed to refresh token' });
   }
 };

@@ -1,6 +1,6 @@
 import './styles/tailwind.css';
-import { getAccessToken } from './api/spotify';
-import { getTopTracks, getTopArtists } from './api/spotify';
+import { getAccessToken } from './spotify';
+import { getTopTracks, getTopArtists } from './spotify';
 
 // Background processes, state management, etc.
 console.log("Background service worker started");
