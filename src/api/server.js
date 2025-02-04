@@ -3,13 +3,14 @@ const axios = require('axios');
 const querystring = require('querystring');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());  
 
-const PORT = 3000;
-const client_id = 'e3f6705da6a7449c819fcfadd059a6d8';
-const client_secret = '7eb256c0a33841aaac297416ce64d47c';
+const PORT = process.env.PORT || 3000;
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 
 app.use(cors());
 
