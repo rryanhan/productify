@@ -16,9 +16,16 @@
     <div id="container" class="relative overflow-hidden h-screen w-screen">
         <div id="currentView" class="flex justify-between items-start p-5 w-full">
             <img id="productify-logo" class="w-56" src="assets/icons/Productify.png" alt="Productify Logo" />
-            <div class="flex items-center space-x-2">
-                <img id="profilePic" class="w-12 h-12 overflow-hidden object-cover rounded-full border-3 border-customWhite" alt="Profile Picture" />
-                <div id="username" class="text-2xl font-light text-customWhite opacity-75">Username</div>
+            <div class="relative">
+                <div id="profileContainer" class="flex items-center space-x-2 cursor-pointer">
+                    <img id="profilePic" class="w-12 h-12 overflow-hidden object-cover rounded-full border-3 border-customWhite" alt="Profile Picture" />
+                    <div id="username" class="text-2xl font-light text-customWhite opacity-75">Username</div>
+                </div>
+                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-black rounded-md shadow-lg z-50">
+                    <a href="#" id="viewProfile" class="block px-4 py-2 text-customWhite text-opacity-75 hover:bg-customGreen hover:bg-opacity-75 hover:rounded-md">Profile</a>
+                    <a href="#" id="setBackgroundImage" class="block px-4 py-2 text-customWhite text-opacity-75 hover:bg-customGreen hover:bg-opacity-75 hover:rounded-md">Set Background Image</a>
+                    <a href="#" id="signOut" class="block px-4 py-2 text-customWhite text-opacity-75 hover:bg-customGreen hover:bg-opacity-75 hover:rounded-md">Sign Out</a>
+                </div>
             </div>
         </div>
         <div class="swiper h-full w-full">
@@ -28,18 +35,41 @@
                     <div id="greeting" class="text-center font-light text-customWhite opacity-75 text-3xl -mt-10"></div>
                 </div>
                 <div class="swiper-slide flex justify-center items-center">
-                    <div id="newView" class="mx-10">
-                        <h1 class="text-4xl">Your Top 50 Songs and Artists</h1>
-                        <div class="swiper-container-artists">
-                            <div class="swiper-wrapper" id="topArtistsWrapper">
-                        </div>
-                        <div class="swiper-container-tracks">
-                            <div class="swiper-wrapper" id="topTracksWrapper">
+                    <div id="newView" class="mx-20">
+                        <div class="text-7xl text-customGreen opacity-75 text-center font-light"> Your Stats</div>
+                        <div id="artistsButtonGroup" class="flex items-end justify-center space-x-4 mb-2 mt-6">
+                            <div class="flex flex-col justify-center">
+                                <h1 class="text-5xl text-customWhite opacity-75 text-center font-light">Artists</h1>
+                            </div>
+                            <div class="flex justify-center space-x-4">
+                                <button id="shortTermArtistsBtn" class="px-4 py-1 bg-customGreen text-white rounded-full">4 Weeks</button>
+                                <button id="mediumTermArtistsBtn" class="px-4 py-1 bg-customGreen text-white rounded-full">6 Months</button>
+                                <button id="longTermArtistsBtn" class="px-4 py-1 bg-customGreen text-white rounded-full">All Time</button>
                             </div>
                         </div>
-
+                        <div class="border-b-2 border-customGrey opacity-40 w-full mb-6"></div>
+                        <div class="swiper-container-artists">
+                            <div class="swiper-wrapper" id="topArtistsWrapper"></div>
+                        </div>
+                        <div id="tracksButtonGroup" class="flex items-end justify-center space-x-4 mb-2 mt-6">
+                            <div class="flex flex-col justify-center">
+                                <h1 class="text-5xl text-customWhite opacity-75 text-center font-light">Tracks</h1>
+                            </div>
+                            <div class="flex justify-center space-x-4">
+                                <button id="shortTermTracksBtn" class="px-4 py-1 bg-customGreen text-white rounded-full">4 Weeks</button>
+                                <button id="mediumTermTracksBtn" class="px-4 py-1 bg-customGreen text-white rounded-full">6 Months</button>
+                                <button id="longTermTracksBtn" class="px-4 py-1 bg-customGreen text-white rounded-full">All Time</button>
+                                <button id="createPlaylistBtn" class="px-1 py-1 bg-customGrey bg-opacity-40 text-customWhite text-opacity-75 rounded-full flex justify-center items-center">
+                                    <img src="assets/icons/add-playlist.png" alt="Add Playlist" class="w-6 h-6">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="border-b-2 border-customGrey opacity-40 w-full mb-6"></div>
+                        <div class="swiper-container-tracks">
+                            <div class="swiper-wrapper" id="topTracksWrapper"></div>
                         </div>
                     </div>
+                </div>
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>

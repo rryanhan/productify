@@ -37,6 +37,7 @@ export function initTracksSwiper(): Swiper {
 }
 
 
+
 export function initSwiper(): Swiper {
     const swiper = new Swiper('.swiper', {
         direction: 'horizontal',
