@@ -15,8 +15,6 @@ handleBackgroundImageUpload();
 setInterval(updateClock, 1000);
 updateClock();
 
-
-
 // GREETING FUNCTIONALITY
 callGreeting();
 
@@ -36,7 +34,7 @@ profileContainer?.addEventListener('click', async () => {
         profileDropdown?.classList.toggle('hidden');
     } else {
         // Trigger login if user is not logged in
-        handleLoginClick();
+        
         console.log('triggered login')
     }
 });
